@@ -1,0 +1,149 @@
+{
+    "tools": [
+    {
+      "id": 1,
+      "name": "GPT-4",
+      "slug": "gpt-4",
+      "short_description": "Advanced language model for text generation and conversation",
+      "full_description": "GPT-4 is OpenAI's most advanced language model, capable of understanding and generating human-like text across a wide range of topics and tasks.",
+      "website_url": "https://openai.com/gpt-4",
+      "logo_url": "https://example.com/logos/openai.png",
+      "screenshots": [
+        "https://example.com/screenshots/gpt4-1.png",
+        "https://example.com/screenshots/gpt4-2.png"
+      ],
+      "category_id": 1,
+      "subcategory_ids": [11, 12],
+      "tags": ["language-model", "text-generation", "conversation", "coding"],
+      "pricing": {
+        "model": "usage-based",
+        "free_tier": true,
+        "starting_price": 0.03,
+        "currency": "USD",
+        "billing_unit": "per 1K tokens",
+        "plans": [
+          {
+            "name": "Pay-per-use",
+            "price": 0.03,
+            "unit": "per 1K tokens",
+            "features": ["API access", "Rate limiting"]
+          }
+        ]
+      },
+      "features": [
+        "Text generation",
+        "Code writing",
+        "Language translation",
+        "Question answering",
+        "Creative writing"
+      ],
+      "use_cases": [
+        "Content creation",
+        "Code assistance", 
+        "Customer support",
+        "Research assistance",
+        "Educational tutoring"
+      ],
+      "supported_languages": ["English", "Spanish", "French", "German", "Chinese", "Japanese"],
+      "platforms": ["Web", "API", "Mobile"],
+      "integrations": ["Slack", "Discord", "Microsoft Teams", "Zapier"],
+      "model_details": {
+        "model_type": "transformer",
+        "parameters": "1.76T",
+        "training_data_cutoff": "2023-04",
+        "context_length": 32768,
+        "supported_formats": ["text", "code"]
+      },
+      "company": {
+        "name": "OpenAI",
+        "founded": "2015",
+        "website": "https://openai.com"
+      },
+      "ratings": {
+        "overall": 4.8,
+        "ease_of_use": 4.7,
+        "features": 4.9,
+        "value": 4.6,
+        "support": 4.5,
+        "total_reviews": 15420
+      },
+      "status": "active",
+      "launch_date": "2023-03-14",
+      "last_updated": "2024-01-15",
+      "verification_status": "verified",
+      "popularity_score": 98,
+      "trending": true
+    },
+    {
+      "id": 2,
+      "name": "DALL-E 3",
+      "slug": "dall-e-3",
+      "short_description": "AI image generator that creates images from text descriptions",
+      "full_description": "DALL-E 3 is OpenAI's latest image generation model that creates high-quality, detailed images from natural language descriptions.",
+      "website_url": "https://openai.com/dall-e-3",
+      "logo_url": "https://example.com/logos/dalle.png",
+      "screenshots": [
+        "https://example.com/screenshots/dalle3-1.png"
+      ],
+      "category_id": 2,
+      "subcategory_ids": [21],
+      "tags": ["image-generation", "text-to-image", "art", "creative"],
+      "pricing": {
+        "model": "usage-based",
+        "free_tier": false,
+        "starting_price": 0.04,
+        "currency": "USD",
+        "billing_unit": "per image",
+        "plans": [
+          {
+            "name": "Standard",
+            "price": 0.04,
+            "unit": "per 1024x1024 image",
+            "features": ["High quality images", "Commercial usage rights"]
+          }
+        ]
+      },
+      "features": [
+        "Text-to-image generation",
+        "High resolution output",
+        "Multiple art styles",
+        "Commercial usage rights"
+      ],
+      "use_cases": [
+        "Marketing materials",
+        "Social media content",
+        "Concept art",
+        "Product visualization",
+        "Creative projects"
+      ],
+      "supported_languages": ["English"],
+      "platforms": ["Web", "API"],
+      "integrations": ["ChatGPT", "Microsoft Copilot"],
+      "model_details": {
+        "model_type": "diffusion",
+        "max_resolution": "1024x1024",
+        "supported_formats": ["PNG"],
+        "generation_time": "10-30 seconds"
+      },
+      "company": {
+        "name": "OpenAI",
+        "founded": "2015",
+        "website": "https://openai.com"
+      },
+      "ratings": {
+        "overall": 4.6,
+        "ease_of_use": 4.8,
+        "features": 4.7,
+        "value": 4.2,
+        "support": 4.4,
+        "total_reviews": 8930
+      },
+      "status": "active",
+      "launch_date": "2023-10-01",
+      "last_updated": "2024-01-10",
+      "verification_status": "verified",
+      "popularity_score": 89,
+      "trending": true
+    }
+  ]
+}

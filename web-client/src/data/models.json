@@ -1,0 +1,15 @@
+{
+    "models": [
+        {
+            "model_id": 1,
+            "model_name": "gpt-3.5-turbo",
+            "model_category": "chat-gpt",
+            "model_type": "text-to-text",
+            "model_description": "This is a sample model",
+            "model_price": 0.00,
+            "model_status": "active",
+            "model_created_at": "2022-01-01T00:00:00.000Z",
+            "model_updated_at": "2022-01-01T00:00:00.000Z"
+        }
+    ]
+}

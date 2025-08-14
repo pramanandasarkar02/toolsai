@@ -1,0 +1,766 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Text Generation",
+      "slug": "text-generation",
+      "description": "AI tools for generating, editing, and processing text content",
+      "icon": "📝",
+      "parent_id": null,
+      "subcategories": [11, 12, 13],
+      "tool_count": 156,
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Image Generation",
+      "slug": "image-generation",
+      "description": "AI tools for creating, editing, and manipulating images",
+      "icon": "🎨",
+      "parent_id": null,
+      "subcategories": [21, 22, 23],
+      "tool_count": 89,
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Audio & Speech",
+      "slug": "audio-speech", 
+      "description": "AI tools for audio processing, speech synthesis, and music generation",
+      "icon": "🎵",
+      "parent_id": null,
+      "subcategories": [31, 32, 33],
+      "tool_count": 67,
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Video Generation",
+      "slug": "video-generation",
+      "description": "AI tools for creating and editing video content", 
+      "icon": "🎬",
+      "parent_id": null,
+      "subcategories": [41, 42],
+      "tool_count": 43,
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Data Analysis",
+      "slug": "data-analysis",
+      "description": "AI tools for analyzing and processing data",
+      "icon": "📊", 
+      "parent_id": null,
+      "subcategories": [51, 52],
+      "tool_count": 78,
+      "is_active": true,
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    }
+  ],
+  "subcategories": [
+    {
+      "id": 11,
+      "name": "Content Writing",
+      "slug": "content-writing",
+      "parent_id": 1,
+      "description": "AI tools specialized in creating written content",
+      "tool_count": 45
+    },
+    {
+      "id": 12,
+      "name": "Code Generation",
+      "slug": "code-generation",
+      "parent_id": 1,
+      "description": "AI tools for writing and debugging code",
+      "tool_count": 67
+    },
+    {
+      "id": 13,
+      "name": "Translation",
+      "slug": "translation",
+      "parent_id": 1,
+      "description": "AI-powered language translation tools",
+      "tool_count": 34
+    }
+  ],
+  "organizations": [
+    {
+      "id": 1,
+      "name": "OpenAI",
+      "slug": "openai",
+      "description": "Leading AI research company focused on developing safe artificial general intelligence",
+      "website": "https://openai.com",
+      "logo_url": "https://example.com/logos/openai.png",
+      "cover_image_url": "https://example.com/covers/openai-cover.jpg",
+      "founded_year": 2015,
+      "headquarters": "San Francisco, CA, USA",
+      "company_size": "1000-5000",
+      "industry": "Artificial Intelligence",
+      "contact_info": {
+        "email": "contact@openai.com",
+        "phone": "+1-555-0123",
+        "address": "3180 18th St, San Francisco, CA 94110"
+      },
+      "social_links": {
+        "twitter": "https://twitter.com/OpenAI",
+        "linkedin": "https://linkedin.com/company/openai",
+        "github": "https://github.com/openai",
+        "blog": "https://openai.com/blog"
+      },
+      "verification_status": "verified",
+      "verification_date": "2023-03-15T00:00:00Z",
+      "subscription_plan": "enterprise",
+      "subscription_expires_at": "2024-12-31T23:59:59Z",
+      "tools_count": 5,
+      "total_reviews": 25630,
+      "average_rating": 4.7,
+      "is_active": true,
+      "created_at": "2023-02-01T00:00:00Z",
+      "updated_at": "2024-01-15T09:30:00Z",
+      "last_tool_update": "2024-01-14T16:45:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Google AI",
+      "slug": "google-ai",
+      "description": "Google's artificial intelligence research and development division",
+      "website": "https://ai.google",
+      "logo_url": "https://example.com/logos/google-ai.png",
+      "cover_image_url": "https://example.com/covers/google-ai-cover.jpg",
+      "founded_year": 2010,
+      "headquarters": "Mountain View, CA, USA",
+      "company_size": "10000+",
+      "industry": "Technology/AI",
+      "contact_info": {
+        "email": "contact@ai.google.com",
+        "phone": "+1-650-253-0000"
+      },
+      "social_links": {
+        "twitter": "https://twitter.com/GoogleAI",
+        "linkedin": "https://linkedin.com/company/google",
+        "github": "https://github.com/google"
+      },
+      "verification_status": "verified",
+      "verification_date": "2023-03-20T00:00:00Z",
+      "subscription_plan": "enterprise",
+      "subscription_expires_at": "2024-12-31T23:59:59Z",
+      "tools_count": 8,
+      "total_reviews": 18940,
+      "average_rating": 4.5,
+      "is_active": true,
+      "created_at": "2023-02-15T00:00:00Z",
+      "updated_at": "2024-01-12T14:20:00Z",
+      "last_tool_update": "2024-01-10T11:30:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Stability AI",
+      "slug": "stability-ai",
+      "description": "AI company focused on generative AI models for images, language, and code",
+      "website": "https://stability.ai",
+      "logo_url": "https://example.com/logos/stability-ai.png",
+      "founded_year": 2020,
+      "headquarters": "London, UK",
+      "company_size": "100-500",
+      "industry": "Artificial Intelligence",
+      "contact_info": {
+        "email": "hello@stability.ai"
+      },
+      "social_links": {
+        "twitter": "https://twitter.com/StabilityAI",
+        "github": "https://github.com/Stability-AI"
+      },
+      "verification_status": "verified",
+      "verification_date": "2023-04-01T00:00:00Z",
+      "subscription_plan": "pro",
+      "subscription_expires_at": "2024-06-30T23:59:59Z",
+      "tools_count": 3,
+      "total_reviews": 8750,
+      "average_rating": 4.4,
+      "is_active": true,
+      "created_at": "2023-03-01T00:00:00Z",
+      "updated_at": "2024-01-08T10:15:00Z",
+      "last_tool_update": "2023-12-20T09:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "john_admin",
+      "email": "john@aitoolsplatform.com",
+      "first_name": "John",
+      "last_name": "Smith",
+      "avatar_url": "https://example.com/avatars/john.jpg",
+      "role": "super_admin",
+      "permissions": [
+        "manage_all_users",
+        "manage_all_organizations", 
+        "manage_all_tools",
+        "manage_categories",
+        "view_analytics",
+        "moderate_content",
+        "manage_site_settings"
+      ],
+      "organization_id": null,
+      "bio": "Platform administrator",
+      "location": "New York, NY",
+      "phone": "+1-555-0100",
+      "is_active": true,
+      "is_verified": true,
+      "email_verified": true,
+      "two_factor_enabled": true,
+      "last_login": "2024-01-15T08:30:00Z",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2024-01-15T08:30:00Z"
+    },
+    {
+      "id": 2,
+      "username": "sarah_openai_admin",
+      "email": "sarah.johnson@openai.com",
+      "first_name": "Sarah",
+      "last_name": "Johnson", 
+      "avatar_url": "https://example.com/avatars/sarah.jpg",
+      "role": "organization_admin",
+      "permissions": [
+        "manage_org_tools",
+        "manage_org_users",
+        "view_org_analytics",
+        "update_org_profile"
+      ],
+      "organization_id": 1,
+      "department": "Product Management",
+      "job_title": "AI Tools Manager",
+      "bio": "Managing OpenAI's tool listings and updates",
+      "location": "San Francisco, CA",
+      "phone": "+1-555-0101",
+      "is_active": true,
+      "is_verified": true,
+      "email_verified": true,
+      "two_factor_enabled": true,
+      "last_login": "2024-01-15T10:15:00Z",
+      "created_at": "2023-02-01T00:00:00Z",
+      "updated_at": "2024-01-15T10:15:00Z"
+    },
+    {
+      "id": 3,
+      "username": "mike_openai_mod",
+      "email": "mike.chen@openai.com", 
+      "first_name": "Mike",
+      "last_name": "Chen",
+      "avatar_url": "https://example.com/avatars/mike.jpg",
+      "role": "organization_moderator",
+      "permissions": [
+        "edit_org_tools",
+        "respond_to_reviews",
+        "update_tool_info"
+      ],
+      "organization_id": 1,
+      "department": "Developer Relations",
+      "job_title": "Technical Content Manager",
+      "bio": "Keeping OpenAI tool information up to date",
+      "location": "San Francisco, CA",
+      "is_active": true,
+      "is_verified": true,
+      "email_verified": true,
+      "two_factor_enabled": false,
+      "last_login": "2024-01-14T16:45:00Z",
+      "created_at": "2023-02-15T00:00:00Z",
+      "updated_at": "2024-01-14T16:45:00Z"
+    },
+    {
+      "id": 4,
+      "username": "lisa_google_admin",
+      "email": "lisa.park@google.com",
+      "first_name": "Lisa",
+      "last_name": "Park",
+      "avatar_url": "https://example.com/avatars/lisa.jpg", 
+      "role": "organization_admin",
+      "permissions": [
+        "manage_org_tools",
+        "manage_org_users", 
+        "view_org_analytics",
+        "update_org_profile"
+      ],
+      "organization_id": 2,
+      "department": "AI Products",
+      "job_title": "Product Manager",
+      "bio": "Managing Google AI tool presence",
+      "location": "Mountain View, CA",
+      "is_active": true,
+      "is_verified": true,
+      "email_verified": true,
+      "two_factor_enabled": true,
+      "last_login": "2024-01-15T09:20:00Z",
+      "created_at": "2023-02-20T00:00:00Z",
+      "updated_at": "2024-01-15T09:20:00Z"
+    },
+    {
+      "id": 5,
+      "username": "alex_regular_user",
+      "email": "alex.martinez@gmail.com",
+      "first_name": "Alex",
+      "last_name": "Martinez",
+      "avatar_url": "https://example.com/avatars/alex.jpg",
+      "role": "user",
+      "permissions": [
+        "create_reviews",
+        "create_collections",
+        "submit_requirements",
+        "bookmark_tools"
+      ],
+      "organization_id": null,
+      "bio": "Digital marketer looking for the best AI tools",
+      "location": "Austin, TX",
+      "website": "https://alexmarketing.com",
+      "social_links": {
+        "twitter": "https://twitter.com/alexmkt",
+        "linkedin": "https://linkedin.com/in/alexmartinez"
+      },
+      "preferences": {
+        "categories_of_interest": [1, 2, 5],
+        "budget_range": "50-200",
+        "notification_settings": {
+          "new_tools": true,
+          "price_changes": false,
+          "recommendations": true,
+          "newsletter": true
+        }
+      },
+      "subscription_plan": "premium",
+      "subscription_expires_at": "2024-06-15T23:59:59Z",
+      "is_active": true,
+      "is_verified": false,
+      "email_verified": true,
+      "two_factor_enabled": false,
+      "last_login": "2024-01-15T11:30:00Z",
+      "created_at": "2023-06-10T00:00:00Z",
+      "updated_at": "2024-01-15T11:30:00Z"
+    }
+  ],
+  "user_roles": [
+    {
+      "role": "super_admin",
+      "name": "Super Administrator", 
+      "description": "Full platform access and control",
+      "level": 1,
+      "default_permissions": [
+        "manage_all_users",
+        "manage_all_organizations",
+        "manage_all_tools", 
+        "manage_categories",
+        "view_analytics",
+        "moderate_content",
+        "manage_site_settings",
+        "manage_payments",
+        "export_data"
+      ]
+    },
+    {
+      "role": "platform_admin",
+      "name": "Platform Administrator",
+      "description": "Platform management without financial controls",
+      "level": 2,
+      "default_permissions": [
+        "manage_all_tools",
+        "manage_categories", 
+        "view_analytics",
+        "moderate_content",
+        "manage_users"
+      ]
+    },
+    {
+      "role": "organization_admin", 
+      "name": "Organization Administrator",
+      "description": "Full control over organization's tools and team",
+      "level": 3,
+      "default_permissions": [
+        "manage_org_tools",
+        "manage_org_users",
+        "view_org_analytics", 
+        "update_org_profile",
+        "manage_org_subscription"
+      ]
+    },
+    {
+      "role": "organization_moderator",
+      "name": "Organization Moderator",
+      "description": "Can edit organization's tools and respond to feedback",
+      "level": 4,
+      "default_permissions": [
+        "edit_org_tools",
+        "respond_to_reviews",
+        "update_tool_info",
+        "view_org_analytics"
+      ]
+    },
+    {
+      "role": "organization_member",
+      "name": "Organization Member", 
+      "description": "Basic organization member with view access",
+      "level": 5,
+      "default_permissions": [
+        "view_org_tools",
+        "view_org_profile"
+      ]
+    },
+    {
+      "role": "user",
+      "name": "Regular User",
+      "description": "Standard platform user",
+      "level": 6,
+      "default_permissions": [
+        "create_reviews",
+        "create_collections",
+        "submit_requirements", 
+        "bookmark_tools",
+        "contact_support"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "id": 1,
+      "name": "GPT-4",
+      "slug": "gpt-4",
+      "organization_id": 1,
+      "short_description": "Advanced language model for text generation and conversation",
+      "full_description": "GPT-4 is OpenAI's most advanced language model, capable of understanding and generating human-like text across a wide range of topics and tasks.",
+      "website_url": "https://openai.com/gpt-4",
+      "logo_url": "https://example.com/logos/gpt4.png",
+      "screenshots": [
+        "https://example.com/screenshots/gpt4-1.png",
+        "https://example.com/screenshots/gpt4-2.png"
+      ],
+      "category_id": 1,
+      "subcategory_ids": [11, 12],
+      "tags": ["language-model", "text-generation", "conversation", "coding"],
+      "pricing": {
+        "model": "usage-based",
+        "free_tier": true,
+        "starting_price": 0.03,
+        "currency": "USD",
+        "billing_unit": "per 1K tokens",
+        "plans": [
+          {
+            "name": "Pay-per-use",
+            "price": 0.03,
+            "unit": "per 1K tokens",
+            "features": ["API access", "Rate limiting", "Priority support"]
+          }
+        ]
+      },
+      "features": [
+        "Text generation",
+        "Code writing", 
+        "Language translation",
+        "Question answering",
+        "Creative writing"
+      ],
+      "use_cases": [
+        "Content creation",
+        "Code assistance",
+        "Customer support",
+        "Research assistance", 
+        "Educational tutoring"
+      ],
+      "supported_languages": ["English", "Spanish", "French", "German", "Chinese", "Japanese"],
+      "platforms": ["Web", "API", "Mobile"],
+      "integrations": ["Slack", "Discord", "Microsoft Teams", "Zapier"],
+      "model_details": {
+        "model_type": "transformer",
+        "parameters": "1.76T",
+        "training_data_cutoff": "2023-04",
+        "context_length": 32768,
+        "supported_formats": ["text", "code"]
+      },
+      "api_info": {
+        "has_api": true,
+        "api_documentation": "https://platform.openai.com/docs",
+        "rate_limits": "3500 RPM / 90000 TPM",
+        "authentication": "API Key"
+      },
+      "ratings": {
+        "overall": 4.8,
+        "ease_of_use": 4.7,
+        "features": 4.9,
+        "value": 4.6,
+        "support": 4.5,
+        "total_reviews": 15420
+      },
+      "status": "active",
+      "approval_status": "approved",
+      "featured": true,
+      "launch_date": "2023-03-14",
+      "last_updated": "2024-01-15T14:30:00Z",
+      "updated_by": 2,
+      "verification_status": "verified",
+      "popularity_score": 98,
+      "trending": true,
+      "created_at": "2023-03-14T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "DALL-E 3",
+      "slug": "dall-e-3",
+      "organization_id": 1,
+      "short_description": "AI image generator that creates images from text descriptions",
+      "full_description": "DALL-E 3 is OpenAI's latest image generation model that creates high-quality, detailed images from natural language descriptions.",
+      "website_url": "https://openai.com/dall-e-3",
+      "logo_url": "https://example.com/logos/dalle3.png",
+      "category_id": 2,
+      "subcategory_ids": [21],
+      "tags": ["image-generation", "text-to-image", "art", "creative"],
+      "pricing": {
+        "model": "usage-based", 
+        "free_tier": false,
+        "starting_price": 0.04,
+        "currency": "USD",
+        "billing_unit": "per image"
+      },
+      "features": [
+        "Text-to-image generation",
+        "High resolution output",
+        "Multiple art styles",
+        "Commercial usage rights"
+      ],
+      "api_info": {
+        "has_api": true,
+        "api_documentation": "https://platform.openai.com/docs/guides/images",
+        "rate_limits": "50 images per minute",
+        "authentication": "API Key"
+      },
+      "ratings": {
+        "overall": 4.6,
+        "ease_of_use": 4.8,
+        "features": 4.7, 
+        "value": 4.2,
+        "support": 4.4,
+        "total_reviews": 8930
+      },
+      "status": "active",
+      "approval_status": "approved",
+      "featured": true,
+      "launch_date": "2023-10-01",
+      "last_updated": "2024-01-10T11:20:00Z",
+      "updated_by": 3,
+      "verification_status": "verified",
+      "popularity_score": 89,
+      "trending": true,
+      "created_at": "2023-10-01T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Bard",
+      "slug": "google-bard",
+      "organization_id": 2,
+      "short_description": "Google's conversational AI service powered by LaMDA",
+      "full_description": "Bard is Google's experimental conversational AI service, powered by LaMDA and designed to provide helpful, accurate, and creative responses.",
+      "website_url": "https://bard.google.com",
+      "logo_url": "https://example.com/logos/bard.png",
+      "category_id": 1,
+      "subcategory_ids": [11],
+      "tags": ["conversational-ai", "text-generation", "google", "lamda"],
+      "pricing": {
+        "model": "free",
+        "free_tier": true,
+        "starting_price": 0,
+        "currency": "USD"
+      },
+      "features": [
+        "Conversational interface",
+        "Web search integration",
+        "Creative writing",
+        "Code assistance"
+      ],
+      "api_info": {
+        "has_api": false,
+        "api_documentation": null
+      },
+      "ratings": {
+        "overall": 4.3,
+        "ease_of_use": 4.6,
+        "features": 4.2,
+        "value": 4.8,
+        "support": 4.0,
+        "total_reviews": 12450
+      },
+      "status": "active",
+      "approval_status": "approved", 
+      "featured": false,
+      "launch_date": "2023-03-21",
+      "last_updated": "2024-01-12T09:15:00Z",
+      "updated_by": 4,
+      "verification_status": "verified",
+      "popularity_score": 75,
+      "trending": false,
+      "created_at": "2023-03-21T00:00:00Z"
+    }
+  ],
+  "organization_members": [
+    {
+      "id": 1,
+      "organization_id": 1,
+      "user_id": 2,
+      "role": "organization_admin",
+      "permissions": [
+        "manage_org_tools",
+        "manage_org_users",
+        "view_org_analytics",
+        "update_org_profile"
+      ],
+      "invited_by": 1,
+      "joined_at": "2023-02-01T00:00:00Z",
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "organization_id": 1,
+      "user_id": 3,
+      "role": "organization_moderator",
+      "permissions": [
+        "edit_org_tools",
+        "respond_to_reviews", 
+        "update_tool_info"
+      ],
+      "invited_by": 2,
+      "joined_at": "2023-02-15T00:00:00Z",
+      "is_active": true
+    },
+    {
+      "id": 3,
+      "organization_id": 2,
+      "user_id": 4,
+      "role": "organization_admin",
+      "permissions": [
+        "manage_org_tools",
+        "manage_org_users",
+        "view_org_analytics",
+        "update_org_profile"
+      ],
+      "invited_by": 1,
+      "joined_at": "2023-02-20T00:00:00Z",
+      "is_active": true
+    }
+  ],
+  "tool_update_history": [
+    {
+      "id": 1,
+      "tool_id": 1,
+      "updated_by": 2,
+      "update_type": "pricing_change",
+      "changes": {
+        "field": "pricing.starting_price",
+        "old_value": 0.02,
+        "new_value": 0.03,
+        "reason": "Updated pricing structure"
+      },
+      "approved_by": 1,
+      "status": "approved",
+      "created_at": "2024-01-15T14:30:00Z",
+      "approved_at": "2024-01-15T14:45:00Z"
+    },
+    {
+      "id": 2,
+      "tool_id": 2,
+      "updated_by": 3,
+      "update_type": "feature_update",
+      "changes": {
+        "field": "features",
+        "old_value": ["Text-to-image generation", "High resolution output"],
+        "new_value": ["Text-to-image generation", "High resolution output", "Multiple art styles", "Commercial usage rights"],
+        "reason": "Added new capabilities"
+      },
+      "approved_by": 2,
+      "status": "approved",
+      "created_at": "2024-01-10T11:20:00Z",
+      "approved_at": "2024-01-10T11:25:00Z"
+    }
+  ],
+  "organization_invitations": [
+    {
+      "id": 1,
+      "organization_id": 1,
+      "email": "newteam@openai.com",
+      "role": "organization_moderator",
+      "invited_by": 2,
+      "invitation_token": "inv_abc123def456",
+      "expires_at": "2024-01-22T23:59:59Z",
+      "status": "pending",
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  ],
+  "approval_workflows": [
+    {
+      "id": 1,
+      "organization_id": 1,
+      "workflow_name": "Tool Update Approval",
+      "steps": [
+        {
+          "step": 1,
+          "role_required": "organization_moderator",
+          "action": "create_update"
+        },
+        {
+          "step": 2,
+          "role_required": "organization_admin", 
+          "action": "review_approve"
+        }
+      ],
+      "auto_approve_minor_changes": true,
+      "require_platform_approval": false,
+      "is_active": true
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "type": "tool_update_approved",
+      "title": "GPT-4 pricing update approved",
+      "message": "Your pricing update for GPT-4 has been approved and is now live.",
+      "data": {
+        "tool_id": 1,
+        "update_id": 1
+      },
+      "is_read": false,
+      "created_at": "2024-01-15T14:45:00Z"
+    }
+  ],
+  "analytics": {
+    "organizations": [
+      {
+        "organization_id": 1,
+        "metrics": {
+          "total_tools": 5,
+          "active_tools": 5,
+          "total_reviews": 25630,
+          "average_rating": 4.7,
+          "monthly_views": 450000,
+          "monthly_clicks": 89000,
+          "conversion_rate": 19.8,
+          "top_performing_tool_id": 1
+        },
+        "period": "2024-01",
+        "last_updated": "2024-01-15T23:59:59Z"
+      }
+    ],
+    "platform": {
+      "total_organizations": 156,
+      "total_tools": 1247,
+      "total_users": 45680,
+      "monthly_active_users": 23400,
+      "total_reviews": 89450,
+      "average_rating": 4.4,
+      "period": "2024-01"
+    }
+  }
+}

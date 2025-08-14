@@ -1,0 +1,106 @@
+{
+    "categories": [
+    {
+      "id": 1,
+      "name": "Text Generation",
+      "slug": "text-generation",
+      "description": "AI tools for generating, editing, and processing text content",
+      "icon": "📝",
+      "parent_id": null,
+      "subcategories": [
+        {
+          "id": 11,
+          "name": "Content Writing",
+          "slug": "content-writing",
+          "parent_id": 1
+        },
+        {
+          "id": 12,
+          "name": "Code Generation",
+          "slug": "code-generation", 
+          "parent_id": 1
+        },
+        {
+          "id": 13,
+          "name": "Translation",
+          "slug": "translation",
+          "parent_id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Image Generation",
+      "slug": "image-generation",
+      "description": "AI tools for creating, editing, and manipulating images",
+      "icon": "🎨",
+      "parent_id": null,
+      "subcategories": [
+        {
+          "id": 21,
+          "name": "Art Generation",
+          "slug": "art-generation",
+          "parent_id": 2
+        },
+        {
+          "id": 22,
+          "name": "Photo Editing",
+          "slug": "photo-editing",
+          "parent_id": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Audio & Speech",
+      "slug": "audio-speech",
+      "description": "AI tools for audio processing, speech synthesis, and music generation",
+      "icon": "🎵",
+      "parent_id": null,
+      "subcategories": [
+        {
+          "id": 31,
+          "name": "Text-to-Speech",
+          "slug": "text-to-speech",
+          "parent_id": 3
+        },
+        {
+          "id": 32,
+          "name": "Speech-to-Text",
+          "slug": "speech-to-text",
+          "parent_id": 3
+        },
+        {
+          "id": 33,
+          "name": "Music Generation",
+          "slug": "music-generation",
+          "parent_id": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Video Generation",
+      "slug": "video-generation",
+      "description": "AI tools for creating and editing video content",
+      "icon": "🎬",
+      "parent_id": null
+    },
+    {
+      "id": 5,
+      "name": "Data Analysis",
+      "slug": "data-analysis",
+      "description": "AI tools for analyzing and processing data",
+      "icon": "📊",
+      "parent_id": null
+    },
+    {
+      "id": 6,
+      "name": "Chatbots & Assistants",
+      "slug": "chatbots-assistants",
+      "description": "AI-powered conversational tools and virtual assistants",
+      "icon": "🤖",
+      "parent_id": null
+    }
+  ]
+}
