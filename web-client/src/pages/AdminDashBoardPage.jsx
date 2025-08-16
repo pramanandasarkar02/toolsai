@@ -1,8 +1,11 @@
 import React from 'react'
+import Organization from '../components/Organization'
 
 const AdminDashBoardPage = () => {
   return (
-    <div>AdminDashBoardPage</div>
+    <div>
+      <Organization/>
+    </div>
   )
 }
 
