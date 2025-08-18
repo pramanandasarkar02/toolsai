@@ -15,6 +15,7 @@ import FavouritePage from './pages/FavouritePage'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import Navbar from './components/Navbar'
+import NotificationPage from './pages/NotificationPage'
 
 
 function App() {
@@ -35,14 +36,18 @@ function App() {
         <Route path="/company/:slug" element={<SingleCompanyPage />} />
         <Route path="/tools/:slug" element={<SingleToolPage />} />
 
-        <Route path="/userprofile/:userId" element={<UserProfilePage />} />
+        <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/favourite" element={<FavouritePage />} />
 
         <Route path="/companydashboard/:companyId" element={<CompanyDashBoard />} />
         <Route path="/admindashboard" element={<AdminDashBoardPage />} />
 
+        <Route path='/notifications' element={<NotificationPage />}/>
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
+
 
         
 

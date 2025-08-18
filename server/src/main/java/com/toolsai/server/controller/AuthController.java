@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -68,7 +68,7 @@ public class AuthController {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
-                signUpRequest.getRole() != null ? signUpRequest.getRole() : Role.GUEST);
+                signUpRequest.getRole() != null ? signUpRequest.getRole() : Role.USER);
 
         userRepository.save(user);
 
