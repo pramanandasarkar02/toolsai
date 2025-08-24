@@ -1,71 +1,100 @@
 package com.toolsai.server.service;
 
-import com.toolsai.server.dto.request.CreateOrganizationRequest;
+import com.toolsai.server.dto.request.OrganizationCreateRequest;
 import com.toolsai.server.dto.response.OrganizationResponse;
+import com.toolsai.server.exception.ResourceAlreadyExistsException;
+import com.toolsai.server.exception.ResourceNotFoundException;
 import com.toolsai.server.model.Organization;
 import com.toolsai.server.repository.OrganizationRepository;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
-@Transactional
-@Validated
 public class OrganizationService {
+
     private final OrganizationRepository organizationRepository;
 
-    public OrganizationResponse createOrganization(@Valid CreateOrganizationRequest request) {
-        log.info("Creating organization with name: {}", request.getOrgName());
-
-        // Check for duplicate organization name
+    @Transactional
+    public OrganizationResponse createOrganization(OrganizationCreateRequest request) {
         if (organizationRepository.existsByOrgName(request.getOrgName())) {
-            throw new IllegalArgumentException("Organization name already exists");
+            throw new ResourceAlreadyExistsException("Organization name already exists");
         }
 
-        // Check for duplicate organization URL
+        if (request.getOrgSlug() != null && organizationRepository.existsByOrgSlug(request.getOrgSlug())) {
+            throw new ResourceAlreadyExistsException("Organization slug already exists");
+        }
+
         if (organizationRepository.existsByOrgUrl(request.getOrgUrl())) {
-            throw new IllegalArgumentException("Organization URL already exists");
+            throw new ResourceAlreadyExistsException("Organization URL already exists");
         }
 
-        // Map request to entity
         Organization organization = Organization.builder()
                 .orgName(request.getOrgName())
+                .orgSlug(request.getOrgSlug())
                 .orgUrl(request.getOrgUrl())
                 .description(request.getDescription())
-                .orgSecret(request.getOrgSecret()) // Include orgSecret
-                .isActive(true)
+                .logoUrl(request.getLogoUrl())
+                .orgSecret(UUID.randomUUID().toString())
                 .joinedAt(LocalDateTime.now())
                 .build();
 
-        // Persist the entity
         Organization savedOrganization = organizationRepository.save(organization);
-        log.info("Organization created successfully with ID: {}", savedOrganization.getId());
-
-        // Map to response DTO
-        return new OrganizationResponse(savedOrganization);
+        return convertToResponse(savedOrganization);
     }
 
-    public List<OrganizationResponse> getAllOrganizations() {
-        log.info("Fetching all organizations");
-        return organizationRepository.findAll()
-                .stream()
-                .map(OrganizationResponse::new)
-                .collect(Collectors.toList());
+    public OrganizationResponse getOrganizationById(Long organizationId) {
+        Organization organization = organizationRepository.findById(organizationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found"));
+        return convertToResponse(organization);
     }
 
-    public OrganizationResponse getOrganizationById(Long id) {
-        log.info("Fetching organization with ID: {}", id);
-        Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Organization not found with ID: " + id));
-        return new OrganizationResponse(organization);
+    public OrganizationResponse getOrganizationBySlug(String slug) {
+        Organization organization = organizationRepository.findByOrgSlug(slug)
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found"));
+        return convertToResponse(organization);
+    }
+
+    public Page<OrganizationResponse> getAllOrganizations(Pageable pageable) {
+        return organizationRepository.findAll(pageable)
+                .map(this::convertToResponse);
+    }
+
+    public Page<OrganizationResponse> searchOrganizations(String query, Pageable pageable) {
+        return organizationRepository.searchByNameOrDescription(query, query, pageable)
+                .map(this::convertToResponse);
+    }
+
+    @Transactional
+    public OrganizationResponse updateOrganization(Long organizationId, OrganizationCreateRequest request) {
+        Organization organization = organizationRepository.findById(organizationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found"));
+
+        organization.setDescription(request.getDescription());
+        organization.setLogoUrl(request.getLogoUrl());
+
+        Organization savedOrganization = organizationRepository.save(organization);
+        return convertToResponse(savedOrganization);
+    }
+
+    @Transactional
+    public void deleteOrganization(Long organizationId) {
+        Organization organization = organizationRepository.findById(organizationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found"));
+        organization.setIsActive(false);
+        organizationRepository.save(organization);
+    }
+
+    private OrganizationResponse convertToResponse(Organization organization) {
+        OrganizationResponse response = new OrganizationResponse();
+        BeanUtils.copyProperties(organization, response);
+        return response;
     }
 }

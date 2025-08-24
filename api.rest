@@ -1,0 +1,436 @@
+# ToolsAI Server API Requests
+# Base URL: http://localhost:8080/api
+
+### Variables
+@baseUrl = http://localhost:8080/api
+@userId = 1
+@organizationId = 1
+@modelId = 1
+@commentId = 1
+@ratingId = 1
+@notificationId = 1
+
+# ============= USER ENDPOINTS =============
+
+### Register User
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "fullName": "John Doe",
+  "bio": "AI enthusiast and developer"
+}
+
+### Login User
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+
+### Get User by ID
+GET {{baseUrl}}/users/{{userId}}
+
+### Get User by Username
+GET {{baseUrl}}/users/username/johndoe
+
+### Get All Users (Paginated)
+GET {{baseUrl}}/users?page=0&size=10&sort=createdAt,desc
+
+### Update User
+PUT {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+
+{
+  "username": "johndoe_updated",
+  "email": "john.doe.updated@example.com",
+  "fullName": "John Doe Updated",
+  "bio": "Updated bio - AI enthusiast, developer, and researcher"
+}
+
+### Delete User
+DELETE {{baseUrl}}/users/{{userId}}
+
+### Verify User
+POST {{baseUrl}}/users/verify?token=verification-token-here
+
+# ============= ORGANIZATION ENDPOINTS =============
+
+### Create Organization
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+
+{
+  "orgName": "AI Innovations Inc",
+  "orgSlug": "ai-innovations",
+  "orgUrl": "https://ai-innovations.com",
+  "description": "Leading AI research and development company",
+  "logoUrl": "https://ai-innovations.com/logo.png"
+}
+
+### Get Organization by ID
+GET {{baseUrl}}/organizations/{{organizationId}}
+
+### Get Organization by Slug
+GET {{baseUrl}}/organizations/slug/ai-innovations
+
+### Get All Organizations (Paginated)
+GET {{baseUrl}}/organizations?page=0&size=10&sort=totalSubscribers,desc
+
+### Search Organizations
+GET {{baseUrl}}/organizations/search?query=AI&page=0&size=10
+
+### Update Organization
+PUT {{baseUrl}}/organizations/{{organizationId}}
+Content-Type: application/json
+
+{
+  "orgName": "AI Innovations Inc",
+  "orgSlug": "ai-innovations",
+  "orgUrl": "https://ai-innovations.com",
+  "description": "Updated description - Leading AI research and development company with global reach",
+  "logoUrl": "https://ai-innovations.com/updated-logo.png"
+}
+
+### Delete Organization
+DELETE {{baseUrl}}/organizations/{{organizationId}}
+
+# ============= AI MODEL ENDPOINTS =============
+
+### Create AI Model
+POST {{baseUrl}}/models
+Content-Type: application/json
+
+{
+  "modelName": "GPT-4 Clone",
+  "modelSlug": "gpt-4-clone",
+  "modelDescription": "A powerful language model for text generation and understanding",
+  "modelVersion": "1.0.0",
+  "modelCategory": "LANGUAGE_MODEL",
+  "pricingType": "PAY_PER_USE",
+  "modelPrice": 0.03,
+  "currency": "USD",
+  "pricingUnit": "per 1K tokens",
+  "apiUrl": "https://api.example.com/gpt-4-clone",
+  "documentationUrl": "https://docs.example.com/gpt-4-clone",
+  "modelImageUrl": "https://example.com/model-image.jpg",
+  "organizationId": 1,
+  "tagNames": ["nlp", "language-model", "text-generation"]
+}
+
+### Get AI Model by ID
+GET {{baseUrl}}/models/{{modelId}}
+
+### Get AI Model by Slug
+GET {{baseUrl}}/models/slug/gpt-4-clone
+
+### Get All AI Models (Paginated)
+GET {{baseUrl}}/models?page=0&size=10&sort=viewCount,desc
+
+### Get AI Models by Category
+GET {{baseUrl}}/models/category/LANGUAGE_MODEL?page=0&size=10
+
+### Get AI Models by Status
+GET {{baseUrl}}/models/status/ACTIVE?page=0&size=10
+
+### Get Featured AI Models
+GET {{baseUrl}}/models/featured?page=0&size=10
+
+### Search AI Models
+GET {{baseUrl}}/models/search?query=GPT&page=0&size=10
+
+### Get Most Viewed Models
+GET {{baseUrl}}/models/trending/most-viewed?limit=10
+
+### Get Most Liked Models
+GET {{baseUrl}}/models/trending/most-liked?limit=10
+
+### Get Top Rated Models
+GET {{baseUrl}}/models/trending/top-rated?limit=10
+
+### Update AI Model
+PUT {{baseUrl}}/models/{{modelId}}
+Content-Type: application/json
+
+{
+  "modelName": "GPT-4 Clone Advanced",
+  "modelSlug": "gpt-4-clone-advanced",
+  "modelDescription": "An updated powerful language model for text generation and understanding with enhanced capabilities",
+  "modelVersion": "1.1.0",
+  "modelCategory": "LANGUAGE_MODEL",
+  "pricingType": "PAY_PER_USE",
+  "modelPrice": 0.04,
+  "currency": "USD",
+  "pricingUnit": "per 1K tokens",
+  "apiUrl": "https://api.example.com/gpt-4-clone-advanced",
+  "documentationUrl": "https://docs.example.com/gpt-4-clone-advanced",
+  "modelImageUrl": "https://example.com/model-image-v2.jpg",
+  "organizationId": 1,
+  "tagNames": ["nlp", "language-model", "text-generation", "advanced"]
+}
+
+### Delete AI Model
+DELETE {{baseUrl}}/models/{{modelId}}
+
+# ============= COMMENT ENDPOINTS =============
+
+### Create Comment on Model
+POST {{baseUrl}}/models/{{modelId}}/comments?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "This is an amazing AI model! The performance is outstanding.",
+  "parentCommentId": null
+}
+
+### Create Reply to Comment
+POST {{baseUrl}}/models/{{modelId}}/comments?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "I completely agree! The accuracy is impressive.",
+  "parentCommentId": 1
+}
+
+### Get Comments by Model
+GET {{baseUrl}}/models/{{modelId}}/comments?page=0&size=20&sort=createdAt,desc
+
+### Update Comment
+PUT {{baseUrl}}/models/{{modelId}}/comments/{{commentId}}?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "This is an updated comment - This AI model is truly exceptional! The performance exceeds expectations."
+}
+
+### Delete Comment
+DELETE {{baseUrl}}/models/{{modelId}}/comments/{{commentId}}?userId={{userId}}
+
+### Get Comments by User
+GET {{baseUrl}}/users/{{userId}}/comments?page=0&size=20&sort=createdAt,desc
+
+# ============= LIKE ENDPOINTS =============
+
+### Toggle Like on Model
+POST {{baseUrl}}/models/{{modelId}}/likes/toggle?userId={{userId}}
+
+### Check if User Liked Model
+GET {{baseUrl}}/models/{{modelId}}/likes/check?userId={{userId}}
+
+### Get Like Count for Model
+GET {{baseUrl}}/models/{{modelId}}/likes/count
+
+# ============= RATING ENDPOINTS =============
+
+### Create or Update Rating for Model
+POST {{baseUrl}}/models/{{modelId}}/ratings?userId={{userId}}
+Content-Type: application/json
+
+{
+  "rating": 5,
+  "review": "Excellent model with great performance and accuracy. Highly recommended!"
+}
+
+### Get Ratings by Model
+GET {{baseUrl}}/models/{{modelId}}/ratings?page=0&size=10&sort=createdAt,desc
+
+### Delete Rating
+DELETE {{baseUrl}}/models/{{modelId}}/ratings/{{ratingId}}?userId={{userId}}
+
+### Get Ratings by User
+GET {{baseUrl}}/users/{{userId}}/ratings?page=0&size=10&sort=createdAt,desc
+
+# ============= TAG ENDPOINTS =============
+
+### Get All Tags (Paginated)
+GET {{baseUrl}}/tags?page=0&size=20&sort=usageCount,desc
+
+### Get Most Used Tags
+GET {{baseUrl}}/tags/popular?limit=50
+
+### Search Tags
+GET {{baseUrl}}/tags/search?query=machine-learning&page=0&size=10
+
+# ============= NOTIFICATION ENDPOINTS =============
+
+### Get Notifications by User
+GET {{baseUrl}}/users/{{userId}}/notifications?page=0&size=20&sort=createdAt,desc
+
+### Get Unread Notifications
+GET {{baseUrl}}/users/{{userId}}/notifications/unread?page=0&size=20
+
+### Get Unread Notification Count
+GET {{baseUrl}}/users/{{userId}}/notifications/unread/count
+
+### Mark Notification as Read
+PUT {{baseUrl}}/users/{{userId}}/notifications/{{notificationId}}/read
+
+### Mark All Notifications as Read
+PUT {{baseUrl}}/users/{{userId}}/notifications/read-all
+
+# ============= ADVANCED QUERIES =============
+
+### Get Models with Price Range Filter
+GET {{baseUrl}}/models?page=0&size=10&minPrice=0.01&maxPrice=0.10
+
+### Get Models by Multiple Categories
+GET {{baseUrl}}/models/category/LANGUAGE_MODEL?page=0&size=5
+###
+GET {{baseUrl}}/models/category/COMPUTER_VISION?page=0&size=5
+
+### Get Models by Pricing Type
+GET {{baseUrl}}/models?pricingType=FREE&page=0&size=10
+###
+GET {{baseUrl}}/models?pricingType=FREEMIUM&page=0&size=10
+###
+GET {{baseUrl}}/models?pricingType=PAID&page=0&size=10
+
+### Complex Search with Filters
+GET {{baseUrl}}/models/search?query=language&page=0&size=10&sort=averageRating,desc
+
+### Get User Activity Summary
+GET {{baseUrl}}/users/{{userId}}/comments?page=0&size=5
+###
+GET {{baseUrl}}/users/{{userId}}/ratings?page=0&size=5
+
+# ============= BULK OPERATIONS =============
+
+### Create Multiple Comments
+POST {{baseUrl}}/models/{{modelId}}/comments?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "First comment about the model's accuracy"
+}
+
+###
+POST {{baseUrl}}/models/{{modelId}}/comments?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "Second comment about the model's speed"
+}
+
+###
+POST {{baseUrl}}/models/{{modelId}}/comments?userId={{userId}}
+Content-Type: application/json
+
+{
+  "content": "Third comment about the model's ease of use"
+}
+
+### Create Multiple Ratings for Different Models
+POST {{baseUrl}}/models/1/ratings?userId={{userId}}
+Content-Type: application/json
+
+{
+  "rating": 5,
+  "review": "Excellent model for text generation!"
+}
+
+###
+POST {{baseUrl}}/models/2/ratings?userId={{userId}}
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "review": "Good computer vision model with room for improvement"
+}
+
+### Toggle Likes on Multiple Models
+POST {{baseUrl}}/models/1/likes/toggle?userId={{userId}}
+###
+POST {{baseUrl}}/models/2/likes/toggle?userId={{userId}}
+###
+POST {{baseUrl}}/models/3/likes/toggle?userId={{userId}}
+
+# ============= ERROR TESTING =============
+
+### Test 404 - Non-existent User
+GET {{baseUrl}}/users/99999
+
+### Test 404 - Non-existent Model
+GET {{baseUrl}}/models/99999
+
+### Test 400 - Invalid Registration Data
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "ab",
+  "email": "invalid-email",
+  "password": "123"
+}
+
+### Test 409 - Duplicate User Registration
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "fullName": "John Doe"
+}
+
+### Test 400 - Invalid Model Creation
+POST {{baseUrl}}/models
+Content-Type: application/json
+
+{
+  "modelName": "",
+  "modelSlug": "invalid slug with spaces",
+  "organizationId": 99999
+}
+
+# ============= STATISTICS AND ANALYTICS =============
+
+### Get Popular Tags
+GET {{baseUrl}}/tags/popular?limit=20
+
+### Get Trending Models
+GET {{baseUrl}}/models/trending/most-viewed?limit=10
+###
+GET {{baseUrl}}/models/trending/most-liked?limit=10
+###
+GET {{baseUrl}}/models/trending/top-rated?limit=10
+
+### Get Models by Organization
+GET {{baseUrl}}/models?organizationId={{organizationId}}&page=0&size=10
+
+### Get Recently Created Models
+GET {{baseUrl}}/models?page=0&size=10&sort=createdAt,desc
+
+### Get Highest Rated Models
+GET {{baseUrl}}/models?page=0&size=10&sort=averageRating,desc
+
+# ============= ADMIN/MODERATION ENDPOINTS =============
+# Note: These might require admin authentication in a real implementation
+
+### Get All Users for Admin
+GET {{baseUrl}}/users?page=0&size=20&sort=createdAt,desc
+
+### Get Inactive Users
+GET {{baseUrl}}/users?isActive=false&page=0&size=10
+
+### Get Unverified Users
+GET {{baseUrl}}/users?isVerified=false&page=0&size=10
+
+### Get Models Pending Approval
+GET {{baseUrl}}/models/status/PENDING_APPROVAL?page=0&size=10
+
+### Get All Organizations
+GET {{baseUrl}}/organizations?page=0&size=20
+
+# ============= HEALTH CHECK =============
+
+### Health Check (if implemented)
+GET {{baseUrl}}/health
+
+### API Version Info (if implemented)
+GET {{baseUrl}}/version

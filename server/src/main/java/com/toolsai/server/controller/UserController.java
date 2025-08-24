@@ -1,96 +1,73 @@
 package com.toolsai.server.controller;
 
-import com.toolsai.server.model.Role;
-import com.toolsai.server.model.User;
-import com.toolsai.server.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.toolsai.server.dto.request.UserLoginRequest;
+import com.toolsai.server.dto.request.UserRegistrationRequest;
+import com.toolsai.server.dto.response.ApiResponse;
+import com.toolsai.server.dto.response.UserResponse;
+import com.toolsai.server.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    @GetMapping("/me")
-    public ResponseEntity<?> getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-
-        return ResponseEntity.ok(user);
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<UserResponse>> registerUser(@Valid @RequestBody UserRegistrationRequest request) {
+        UserResponse user = userService.registerUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success("User registered successfully", user));
     }
 
-    @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(users);
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<UserResponse>> loginUser(@Valid @RequestBody UserLoginRequest request) {
+        UserResponse user = userService.authenticateUser(request);
+        return ResponseEntity.ok(ApiResponse.success("Login successful", user));
     }
 
-    @GetMapping("/by-role/{role}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
-    public ResponseEntity<List<User>> getUsersByRole(@PathVariable String role) {
-        try {
-            Role userRole = Role.valueOf(role.toUpperCase());
-            List<User> users = userRepository.findByRole(userRole);
-            return ResponseEntity.ok(users);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        }
+    @GetMapping("/{userId}")
+    public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable Long userId) {
+        UserResponse user = userService.getUserById(userId);
+        return ResponseEntity.ok(ApiResponse.success(user));
     }
 
-    @PutMapping("/{id}/role")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> updateUserRole(@PathVariable Long id, @RequestParam String role) {
-        try {
-            Role newRole = Role.valueOf(role.toUpperCase());
-            Optional<User> userOptional = userRepository.findById(id);
-
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                user.setRole(newRole);
-                userRepository.save(user);
-                return ResponseEntity.ok(user);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Invalid role: " + role);
-        }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<ApiResponse<UserResponse>> getUserByUsername(@PathVariable String username) {
+        UserResponse user = userService.getUserByUsername(username);
+        return ResponseEntity.ok(ApiResponse.success(user));
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping
+    public ResponseEntity<ApiResponse<Page<UserResponse>>> getAllUsers(Pageable pageable) {
+        Page<UserResponse> users = userService.getAllUsers(pageable);
+        return ResponseEntity.ok(ApiResponse.success(users));
     }
 
-    @PutMapping("/{id}/status")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> updateUserStatus(@PathVariable Long id, @RequestParam boolean enabled) {
-        Optional<User> userOptional = userRepository.findById(id);
+    @PutMapping("/{userId}")
+    public ResponseEntity<ApiResponse<UserResponse>> updateUser(
+            @PathVariable Long userId,
+            @Valid @RequestBody UserRegistrationRequest request) {
+        UserResponse user = userService.updateUser(userId, request);
+        return ResponseEntity.ok(ApiResponse.success("User updated successfully", user));
+    }
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setEnabled(enabled);
-            userRepository.save(user);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.ok(ApiResponse.success("User deleted successfully", null));
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<ApiResponse<UserResponse>> verifyUser(@RequestParam String token) {
+        UserResponse user = userService.verifyUser(token);
+        return ResponseEntity.ok(ApiResponse.success("User verified successfully", user));
     }
 }

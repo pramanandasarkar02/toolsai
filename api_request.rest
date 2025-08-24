@@ -1,0 +1,438 @@
+# ToolsAI Server API Testing
+# Base URL for all requests
+@baseUrl = http://localhost:8080/api
+
+# =============================================================================
+# USER ENDPOINTS
+# =============================================================================
+
+### Register a new user
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe1",
+  "email": "john.doe1@example.com",
+  "password": "securepassword123",
+  "fullName": "John Doe",
+  "bio": "Software developer passionate about AI"
+}
+
+### Login user
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword123"
+}
+
+### Get user by ID
+GET {{baseUrl}}/users/1
+
+### Get user by username
+GET {{baseUrl}}/users/username/johndoe
+
+### Get all users (with pagination)
+GET {{baseUrl}}/users?page=0&size=10&sort=createdAt,desc
+
+### Update user
+PUT {{baseUrl}}/users/1
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "securepassword123",
+  "fullName": "John Doe Updated",
+  "bio": "Updated bio: Senior software developer passionate about AI and ML"
+}
+
+### Delete user (soft delete)
+DELETE {{baseUrl}}/users/1
+
+### Verify user account
+POST {{baseUrl}}/users/verify?token=verification-token-here
+
+# =============================================================================
+# ORGANIZATION ENDPOINTS
+# =============================================================================
+
+### Create organization
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+
+{
+  "orgName": "OpenAI",
+  "orgSlug": "openai",
+  "orgUrl": "https://openai.com",
+  "description": "OpenAI is an AI research and deployment company",
+  "logoUrl": "https://openai.com/logo.png"
+}
+
+### Get organization by ID
+GET {{baseUrl}}/organizations/1
+
+### Get organization by slug
+GET {{baseUrl}}/organizations/slug/openai
+
+### Get all organizations (with pagination)
+GET {{baseUrl}}/organizations?page=0&size=10&sort=orgName,asc
+
+### Search organizations
+GET {{baseUrl}}/organizations/search?query=AI&page=0&size=10
+
+### Update organization
+PUT {{baseUrl}}/organizations/1
+Content-Type: application/json
+
+{
+  "orgName": "OpenAI",
+  "orgSlug": "openai",
+  "orgUrl": "https://openai.com",
+  "description": "Updated: OpenAI is an AI research and deployment company focused on AGI",
+  "logoUrl": "https://openai.com/new-logo.png"
+}
+
+### Delete organization (soft delete)
+DELETE {{baseUrl}}/organizations/1
+
+# =============================================================================
+# AI MODEL ENDPOINTS
+# =============================================================================
+
+### Create AI Model
+POST {{baseUrl}}/models
+Content-Type: application/json
+
+{
+  "modelName": "GPT-4",
+  "modelSlug": "gpt-4",
+  "modelDescription": "Most capable GPT-4 model, able to do complex tasks",
+  "modelVersion": "1.0.0",
+  "modelCategory": "TEXT_GENERATION",
+  "pricingType": "PAY_PER_USE",
+  "modelPrice": 0.03,
+  "currency": "USD",
+  "pricingUnit": "per 1K tokens",
+  "apiUrl": "https://api.openai.com/v1/chat/completions",
+  "documentationUrl": "https://platform.openai.com/docs",
+  "modelImageUrl": "https://openai.com/gpt4-image.png",
+  "organizationId": 1,
+  "tagNames": ["language-model", "text-generation", "openai"]
+}
+
+### Get AI Model by ID
+GET {{baseUrl}}/models/1
+
+### Get AI Model by slug
+GET {{baseUrl}}/models/slug/gpt-4
+
+### Get all AI Models (with pagination)
+GET {{baseUrl}}/models?page=0&size=10&sort=createdAt,desc
+
+### Get AI Models by category
+GET {{baseUrl}}/models/category/TEXT_GENERATION?page=0&size=10
+
+### Get AI Models by status
+GET {{baseUrl}}/models/status/ACTIVE?page=0&size=10
+
+### Get featured AI Models
+GET {{baseUrl}}/models/featured?page=0&size=10
+
+### Search AI Models
+GET {{baseUrl}}/models/search?query=GPT&page=0&size=10
+
+### Get most viewed models
+GET {{baseUrl}}/models/trending/most-viewed?limit=5
+
+### Get most liked models
+GET {{baseUrl}}/models/trending/most-liked?limit=5
+
+### Get top rated models
+GET {{baseUrl}}/models/trending/top-rated?limit=5
+
+### Update AI Model
+PUT {{baseUrl}}/models/1
+Content-Type: application/json
+
+{
+  "modelName": "GPT-4",
+  "modelSlug": "gpt-4",
+  "modelDescription": "Updated: Most capable GPT-4 model with enhanced reasoning",
+  "modelVersion": "1.1.0",
+  "modelCategory": "TEXT_GENERATION",
+  "pricingType": "PAY_PER_USE",
+  "modelPrice": 0.025,
+  "currency": "USD",
+  "pricingUnit": "per 1K tokens",
+  "apiUrl": "https://api.openai.com/v1/chat/completions",
+  "documentationUrl": "https://platform.openai.com/docs/models/gpt-4",
+  "modelImageUrl": "https://openai.com/gpt4-updated-image.png",
+  "organizationId": 1,
+  "tagNames": ["language-model", "text-generation", "openai", "reasoning"]
+}
+
+### Delete AI Model (set to inactive)
+DELETE {{baseUrl}}/models/1
+
+# =============================================================================
+# COMMENT ENDPOINTS
+# =============================================================================
+
+### Create comment on AI Model
+POST {{baseUrl}}/models/1/comments?userId=1
+Content-Type: application/json
+
+{
+  "content": "This is an excellent AI model! The performance is outstanding.",
+  "parentCommentId": null
+}
+
+### Create reply to comment
+POST {{baseUrl}}/models/1/comments?userId=2
+Content-Type: application/json
+
+{
+  "content": "I completely agree! The accuracy is impressive.",
+  "parentCommentId": 1
+}
+
+### Get comments by model
+GET {{baseUrl}}/models/1/comments?page=0&size=10&sort=createdAt,desc
+
+### Get comments by user
+GET {{baseUrl}}/users/1/comments?page=0&size=10&sort=createdAt,desc
+
+### Update comment
+PUT {{baseUrl}}/models/1/comments/1?userId=1
+Content-Type: application/json
+
+{
+  "content": "Updated: This is an absolutely excellent AI model! The performance is truly outstanding and reliable."
+}
+
+### Delete comment
+DELETE {{baseUrl}}/models/1/comments/1?userId=1
+
+# =============================================================================
+# LIKE ENDPOINTS
+# =============================================================================
+
+### Toggle like on AI Model
+POST {{baseUrl}}/models/1/likes/toggle?userId=1
+
+### Check if user liked the model
+GET {{baseUrl}}/models/1/likes/check?userId=1
+
+### Get like count for model
+GET {{baseUrl}}/models/1/likes/count
+
+# =============================================================================
+# RATING ENDPOINTS
+# =============================================================================
+
+### Create or update rating
+POST {{baseUrl}}/models/1/ratings?userId=1
+Content-Type: application/json
+
+{
+  "rating": 5,
+  "review": "Exceptional AI model with great performance and reliability. Highly recommended!"
+}
+
+### Get ratings by model
+GET {{baseUrl}}/models/1/ratings?page=0&size=10&sort=createdAt,desc
+
+### Get ratings by user
+GET {{baseUrl}}/users/1/ratings?page=0&size=10&sort=createdAt,desc
+
+### Delete rating
+DELETE {{baseUrl}}/models/1/ratings/1?userId=1
+
+# =============================================================================
+# TAG ENDPOINTS
+# =============================================================================
+
+### Get all tags
+GET {{baseUrl}}/tags?page=0&size=20&sort=name,asc
+
+### Get most used tags
+GET {{baseUrl}}/tags/popular?limit=10
+
+### Search tags
+GET {{baseUrl}}/tags/search?query=ai&page=0&size=10
+
+# =============================================================================
+# NOTIFICATION ENDPOINTS
+# =============================================================================
+
+### Get notifications by user
+GET {{baseUrl}}/users/1/notifications?page=0&size=10&sort=createdAt,desc
+
+### Get unread notifications
+GET {{baseUrl}}/users/1/notifications/unread?page=0&size=10
+
+### Get unread notification count
+GET {{baseUrl}}/users/1/notifications/unread/count
+
+### Mark notification as read
+PUT {{baseUrl}}/users/1/notifications/1/read
+
+### Mark all notifications as read
+PUT {{baseUrl}}/users/1/notifications/read-all
+
+# =============================================================================
+# BULK TESTING SCENARIOS
+# =============================================================================
+
+### Test complete user workflow
+# 1. Register user
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "testuser1",
+  "email": "testuser1@example.com",
+  "password": "password123",
+  "fullName": "Test User One",
+  "bio": "Test user for API testing"
+}
+
+###
+# 2. Login user
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "testuser1@example.com",
+  "password": "password123"
+}
+
+###
+# 3. Create organization
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+
+{
+  "orgName": "Test AI Company",
+  "orgSlug": "test-ai-company",
+  "orgUrl": "https://testai.com",
+  "description": "A test AI company for API testing",
+  "logoUrl": "https://testai.com/logo.png"
+}
+
+###
+# 4. Create AI Model
+POST {{baseUrl}}/models
+Content-Type: application/json
+
+{
+  "modelName": "Test AI Model1",
+  "modelSlug": "test-ai-model1",
+  "modelDescription": "A test AI model for API testing purposes",
+  "modelVersion": "1.0.0",
+  "modelCategory": "IMAGE_GENERATION",
+  "pricingType": "FREE",
+  "modelPrice": 0.00,
+  "currency": "USD",
+  "pricingUnit": "free",
+  "apiUrl": "https://api.testai.com/v1/generate",
+  "documentationUrl": "https://docs.testai.com",
+  "modelImageUrl": "https://testai.com/model-image.png",
+  "organizationId": 2,
+  "tagNames": ["test", "image-generation", "free"]
+}
+
+###
+# 5. Add comment to model
+POST {{baseUrl}}/models/2/comments?userId=2
+Content-Type: application/json
+
+{
+  "content": "This test model works great for testing purposes!"
+}
+
+###
+# 6. Like the model
+POST {{baseUrl}}/models/2/likes/toggle?userId=2
+
+###
+# 7. Rate the model
+POST {{baseUrl}}/models/2/ratings?userId=2
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "review": "Good test model, works as expected for testing scenarios."
+}
+
+# =============================================================================
+# ERROR TESTING SCENARIOS
+# =============================================================================
+
+### Test validation errors - Invalid email
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "invalid-email",
+  "password": "pass",
+  "fullName": "",
+  "bio": ""
+}
+
+### Test resource not found
+GET {{baseUrl}}/users/99999
+
+### Test duplicate resource creation
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "fullName": "John Doe Duplicate",
+  "bio": "Duplicate user"
+}
+
+### Test unauthorized action - wrong user trying to delete comment
+DELETE {{baseUrl}}/models/1/comments/1?userId=99999
+
+# =============================================================================
+# ADVANCED QUERY SCENARIOS
+# =============================================================================
+
+### Complex pagination and sorting
+GET {{baseUrl}}/models?page=0&size=5&sort=averageRating,desc&sort=likeCount,desc
+
+### Filter models with specific criteria
+GET {{baseUrl}}/models/category/TEXT_GENERATION?page=0&size=10&sort=viewCount,desc
+
+### Search with special characters
+GET {{baseUrl}}/models/search?query=AI%20%26%20ML&page=0&size=10
+
+### Get user statistics
+GET {{baseUrl}}/users/1/comments?page=0&size=100
+###
+GET {{baseUrl}}/users/1/ratings?page=0&size=100
+
+# =============================================================================
+# PERFORMANCE TESTING
+# =============================================================================
+
+### Load test - Get popular models
+GET {{baseUrl}}/models/trending/most-viewed?limit=50
+###
+GET {{baseUrl}}/models/trending/most-liked?limit=50
+###
+GET {{baseUrl}}/models/trending/top-rated?limit=50
+
+### Load test - Search functionality
+GET {{baseUrl}}/models/search?query=AI&page=0&size=20
+###
+GET {{baseUrl}}/organizations/search?query=tech&page=0&size=20
+###
+GET {{baseUrl}}/tags/search?query=machine&page=0&size=20

@@ -1,51 +1,68 @@
 package com.toolsai.server.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.toolsai.server.dto.request.CreateOrganizationRequest;
+import com.toolsai.server.dto.request.OrganizationCreateRequest;
+import com.toolsai.server.dto.response.ApiResponse;
 import com.toolsai.server.dto.response.OrganizationResponse;
 import com.toolsai.server.service.OrganizationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/v1/organizations")
+@RequestMapping("/api/organizations")
 @RequiredArgsConstructor
-@Slf4j
 public class OrganizationController {
-    private  final OrganizationService organizationService;
 
+    private final OrganizationService organizationService;
 
     @PostMapping
-    public ResponseEntity<?> createOrganization(@Valid @RequestBody CreateOrganizationRequest request) {
-        try {
-            log.info("Received request: {}", new ObjectMapper().writeValueAsString(request));
-            log.info("Creating organization: {}", request.getOrgName());
-            OrganizationResponse organizationResponse = organizationService.createOrganization(request);
-            return ResponseEntity.ok(organizationResponse);
-        } catch (IllegalArgumentException e) {
-            log.error("Validation error: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            log.error("Internal server error: {}", e.getMessage(), e);
-            return ResponseEntity.status(500).body("Internal server error");
-        }
+    public ResponseEntity<ApiResponse<OrganizationResponse>> createOrganization(
+            @Valid @RequestBody OrganizationCreateRequest request) {
+        OrganizationResponse organization = organizationService.createOrganization(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success("Organization created successfully", organization));
+    }
+
+    @GetMapping("/{organizationId}")
+    public ResponseEntity<ApiResponse<OrganizationResponse>> getOrganizationById(@PathVariable Long organizationId) {
+        OrganizationResponse organization = organizationService.getOrganizationById(organizationId);
+        return ResponseEntity.ok(ApiResponse.success(organization));
+    }
+
+    @GetMapping("/slug/{slug}")
+    public ResponseEntity<ApiResponse<OrganizationResponse>> getOrganizationBySlug(@PathVariable String slug) {
+        OrganizationResponse organization = organizationService.getOrganizationBySlug(slug);
+        return ResponseEntity.ok(ApiResponse.success(organization));
     }
 
     @GetMapping
-    public ResponseEntity<List<OrganizationResponse>> getAllOrganizations() {
-        List<OrganizationResponse> organizations = organizationService.getAllOrganizations();
-        return ResponseEntity.ok(organizations);
+    public ResponseEntity<ApiResponse<Page<OrganizationResponse>>> getAllOrganizations(Pageable pageable) {
+        Page<OrganizationResponse> organizations = organizationService.getAllOrganizations(pageable);
+        return ResponseEntity.ok(ApiResponse.success(organizations));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrganizationResponse> getOrganizationById(Long id) {
-        OrganizationResponse organizationResponse = organizationService.getOrganizationById(id);
-        return ResponseEntity.ok(organizationResponse);
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<Page<OrganizationResponse>>> searchOrganizations(
+            @RequestParam String query, Pageable pageable) {
+        Page<OrganizationResponse> organizations = organizationService.searchOrganizations(query, pageable);
+        return ResponseEntity.ok(ApiResponse.success(organizations));
     }
 
+    @PutMapping("/{organizationId}")
+    public ResponseEntity<ApiResponse<OrganizationResponse>> updateOrganization(
+            @PathVariable Long organizationId,
+            @Valid @RequestBody OrganizationCreateRequest request) {
+        OrganizationResponse organization = organizationService.updateOrganization(organizationId, request);
+        return ResponseEntity.ok(ApiResponse.success("Organization updated successfully", organization));
+    }
+
+    @DeleteMapping("/{organizationId}")
+    public ResponseEntity<ApiResponse<Void>> deleteOrganization(@PathVariable Long organizationId) {
+        organizationService.deleteOrganization(organizationId);
+        return ResponseEntity.ok(ApiResponse.success("Organization deleted successfully", null));
+    }
 }

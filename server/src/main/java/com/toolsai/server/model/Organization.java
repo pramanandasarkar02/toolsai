@@ -1,17 +1,15 @@
 package com.toolsai.server.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "organizations")
@@ -20,42 +18,60 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Organization {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Organization name is required")
-    @Size(max = 100, message = "Organization name cannot exceed 100 characters")
-    @Column(unique = true, name = "org_name", nullable = false)
+    @Column(name = "org_name", nullable = false, unique = true, length = 100)
     private String orgName;
 
-    @NotBlank(message = "Organization URL is required")
-    @Size(max = 255, message = "Organization URL cannot exceed 255 characters")
-    @URL(message = "Organization URL must be valid")
-    @Column(unique = true, name = "org_url", nullable = false)
+    @Column(name = "org_slug", unique = true, length = 100)
+    private String orgSlug;
+
+    @Column(name = "org_url", nullable = false, unique = true)
     private String orgUrl;
 
-    @Size(max = 500, message = "Description cannot exceed 500 characters")
-    @Column(name = "description")
+    @Column(length = 1000)
     private String description;
 
-    @NotBlank(message = "Organization secret is required")
-    @Size(min = 8, max = 255, message = "Organization secret must be between 8 and 255 characters")
+    @Column(name = "logo_url")
+    private String logoUrl;
+
     @Column(name = "org_secret", nullable = false)
     private String orgSecret;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 
     @Column(name = "joined_at")
     private LocalDateTime joinedAt;
 
     @Column(name = "is_active")
     @Builder.Default
-    private boolean isActive = true;
+    private Boolean isActive = true;
+
+    @Column(name = "is_verified")
+    @Builder.Default
+    private Boolean isVerified = false;
+
+    @Column(name = "total_models")
+    @Builder.Default
+    private Integer totalModels = 0;
+
+    @Column(name = "total_subscribers")
+    @Builder.Default
+    private Integer totalSubscribers = 0;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    // Relationships
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AIModel> aiModels;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserOrganizationSubscription> subscriptions;
 }
